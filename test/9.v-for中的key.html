@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <div id="app"> 
+        <div>
+            <input type="text" v-model="name">
+            <button @click="addNewUser">添加</button>
+        </div>
+         <ul>
+            <li v-for="(user, index) in userlist" :key="user.id">
+                <input type="checkbox" />
+                姓名：{{user.name}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        const vm = {
+            data: function() {
+                return {
+                    userlist:[
+                        {id:1, name:'张三'},
+                        {id:2, name:'李四'},
+                    ],
+                    name:'',
+                    nextId:2,
+                }
+            },
+            methods: {
+                addNewUser: function() {
+                    this.userlist.push({id:this.nextId, name:this.name})
+                    this.name = ''
+                    this.nextId++
+                }
+            }
+        }
+        const app = Vue.createApp(vm)
+        app.mount('#app')
+    </script>
+</body>
+</html>
